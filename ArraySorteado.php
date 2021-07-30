@@ -1,35 +1,26 @@
 <?php 
-
     class arayStore{
 
         public function arrayStore(){
+            
+            // Geração Array automatica 
+            for ($i=0; $i < 20; $i++) { 
+               $array [] = rand(1, 10);
+               echo $array[$i]. "-";
+            }
 
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-            $a [] = rand(0, 10);
-
-           var_dump(array_unique($a));
-           echo $a[0][1];
-
-     }
+            $countValues = array_count_values($array);
+            $max = max($countValues);
+            
+            $filtered = array_filter($countValues, function($value) use($max){ return $value == $max;});
+            
+            echo '<pre>';
+            var_dump($filtered);
+       }
     }
-   $a = new arayStore();
-   $a->arrayStore();
+    
+    $a = new arayStore();
+    echo $a->arrayStore();
+
+
 ?>

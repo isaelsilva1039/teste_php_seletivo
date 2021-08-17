@@ -38,6 +38,7 @@
             return $this->salariobruto;
         }
 
+        // calcular impostos e IRRF
         public function calcularSalarioComReajustesIimpostos(){
             $reajuste      = $this->salariobruto * 0.38;
             $gatrificacao  = $this->salariobruto * 0.2;
@@ -54,11 +55,13 @@
             return $array;
         }
 
+        // calcular quantidades de dias que a pessoa ja viveu 
         public function quantosDiasJaViveu($dia ,$mes  ,$ano){
             $dias = 365 * $ano + 30 * $mes +  $dia  ;      
             return $dias;
         }
 
+        // calcular salario liquido
         public function salarioLiquidos($horas , $dependentes){
             $salariobruto = 12 * $horas + 40 *$dependentes;
             $inss = $salariobruto * 0.085;
@@ -74,11 +77,53 @@
             ];   
             return $array;
         }
+
+        public function mediaAprovado($nota1,$nota2,$nota3,$nota4){
+
+            $somaNotasGeral = $nota1 + $nota2 + $nota3 + $nota4;
+            $mediabimestre  = $somaNotasGeral / 4;
+            if($mediabimestre >= 7 ){
+                $situacao = "Aluno $this->nome Aprovado com a media $mediabimestre";
+            }else {
+                $situacao = "Aluno $this->nome Reprovado com a media $mediabimestre";
+            }
+            return $situacao;    
+        }
+
+        public function validaçoesTriangulo($lado1,$lado2,$lado3){
+            if($lado1 < $lado2 + $lado3 && $lado2 < $lado1 + $lado3  && $lado3 < $lado1 + $lado2){
+              if($lado1 == $lado2 && $lado2 == $lado3){
+                  $tipo = "Triango equilatro";
+              }elseif(!$lado1 == !$lado2 && !$lado2 == !$lado3 && !$lado1 == !$lado3){ $tipo = "Triango escaleno";
+              }else {$tipo   = "Triango isosele"; 
+            }
+            }else {
+                $tipo = "Não e um triangulo";
+            } 
+        }
+
+        public function mostraQuizePrimeiroFibonace(){
+            $numerAnterior = 0 ;
+            $numeroAtual   = 1 ;
+            $novoNUmero    = 0 ;
+
+            $rest = "1";
+            for ($i= 1; $i < 15 ; $i++) { 
+                $novoNUmero = $numerAnterior + $numeroAtual;
+                $numerAnterior = $numeroAtual;
+                $numeroAtual = $novoNUmero;
+                $rest .= " ". $novoNUmero;
+             }
+
+             return $rest;
+
+             
+
+        }
     }
 
-    $e = new Exercicio();
+    $e = new Exercicio;
+    echo $e->mostraQuizePrimeiroFibonace();
 
-    $e->getNome("isael ");
-   var_dump($e->salarioLiquidos(220,2));
 
 ?>
